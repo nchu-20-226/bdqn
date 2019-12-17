@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0px;
+				padding: 0px;
+			}
+			.main{
+				width: 1240px;
+				margin: auto;
+			}
+			body{
+				font-size: 12px;
+			}
+			/*头部份*/
+			.header{
+				width: 100%;
+				border-bottom: 1px solid black;
+			}
+			.header>img{
+				display: inline-block;
+			}
+			.h-right{
+				display: inline-block;
+				float: right;
+				margin-top: 10px;
+				margin-right: 20px;
+			}
+			.h-right>span{
+				color: #999999;
+				margin-right: 10px;
+			}
+			.h-right>a{
+				text-decoration: none;
+			}
+			.h-right>a:hover{
+				color: red;
+			}
+			.h-right-help{
+				display: inline-block;
+				padding: 5px;
+				border: 1px solid black;
+				margin-left: 30px;
+			}
+			.h-right-img,.h-right-help>span{
+				vertical-align: middle;
+			}
+			
+			
+			/*体部分*/
+			.secation{
+				background-color: #FCFCFC;
+				width: 100%;
+				border: 1px solid white;
+			}
+			.secation-child{
+				margin-top: 30px;
+				/*border: 1px solid red;*/
+				padding-top:30px ;
+			}
+			.secation-left{
+				display: inline-block;
+				padding-left: 120px;
+				/*border: 1px solid red;*/
+				margin-bottom: 40px;
+				/*padding-top: 50px;*/
+			}
+			.secation-right{
+				display: inline-block;
+				/*border: 1px solid red;*/
+				width: 350px;
+				margin-left: 150px;
+				/*margin-bottom: 40px;*/
+				margin-top: 30px;
+			}
+			.secation-child:after{
+				content: '';
+				display: block;
+				clear: both;
+			}
+			.secation-right-1{
+				/*margin-top: 50px;*/
+			}
+			.secation-right-1>span{
+				float: left;
+			}
+			.secation-right-1>a{
+				float: right;
+				text-decoration: none;
+			}
+			.secation-right-1>a:hover{
+				color: red;
+			}
+			.secation-right-1:after{
+				content: '';
+				display: block;
+				clear: both;
+			}
+			form{
+				margin-top: 10px;
+			}
+			form>input:nth-of-type(1){
+				background: url(img/login/userHead.png) 30px 50% no-repeat;
+				height: 50px;
+				text-indent: 80px;
+				width: 350px;
+				box-sizing: border-box;
+				background-color: white;
+				font-size: 16px;
+				margin-bottom: 10px;
+				border: 1px solid #DEDEDE;
+			}
+			form>input:nth-of-type(2){
+				background: url(img/login/lock.png) 30px 50% no-repeat;
+				height: 50px;
+				text-indent: 80px;
+				width: 350px;
+				box-sizing: border-box;
+				background-color: white;
+				font-size: 16px;
+				margin-bottom: 10px;
+				border: 1px solid #DEDEDE;
+			}
+			form>input:nth-of-type(3){
+				height: 50px;
+				line-height: 50px;
+				text-align: center;
+				width: 350px;
+				box-sizing: border-box;
+				background-color: #FF3C3C;
+				font-size: 16px;
+				margin-bottom: 10px;
+				margin-top: 15px;
+				color: white;
+				margin-top: 10px;
+				border: none;
+				border-radius: 3px;
+			}
+			.secation-right-2>input{
+				margin-right: 10px;
+			}
+			.secation-right-2-left>input,.secation-right-2-left>a{
+				vertical-align: middle;
+			}
+			.secation-right-2-left>a,.secation-right-2>a{
+				color: #999999;
+				text-decoration: none;
+			}
+			.secation-right-2-left{
+				display: inline-block;
+				float: left;
+			}
+			.secation-right-2-left>a{
+				position: relative;
+				bottom: 2px;
+			}
+			.secation-right-2>a{
+				display: inline-block;
+				float: right;
+			}
+			.secation-right-2:after{
+				content: '';
+				display: block;
+				clear: both;
+			}
+			.secation-right-img{
+				width: 100%;
+				height: 35px;
+				line-height: 35px;
+				/*border: 1px solid red;*/
+				margin-top: 10px;
+			}
+			.secation-right-img li{
+				display: inline-block;
+				list-style: none;
+				height: 35px;
+				/*border: 1px solid red;*/
+			}
+			.secation-right-img li:nth-of-type(1){
+				background: url(img/login/qqf.png);
+				background-size: 35px,35px;
+			}
+			.secation-right-img li:nth-of-type(2){
+				background: url(img/login/wbf.png);
+				background-size: 35px,35px;
+				height: 35px;
+			}
+			.secation-right-img li:nth-of-type(3){
+				background: url(img/login/zhif.png);
+				background-size: 35px,35px;
+				height: 35px;
+			}
+			.secation-right-img li:nth-of-type(4){
+				background: url(img/login/wxf.png);
+				background-size: 35px,35px;
+				height: 35px;
+			}
+			.secation-right-img li:nth-of-type(1):hover{
+				background: url(img/login/qqt.png);
+				background-size: 35px,35px;
+				height: 35px;
+			}
+			.secation-right-img li:nth-of-type(2):hover{
+				background: url(img/login/wbt.png);
+				background-size: 35px,35px;
+				height: 35px;
+			}
+			.secation-right-img li:nth-of-type(3):hover{
+				background: url(img/login/zhit.png);
+				background-size: 35px,35px;
+				height: 35px;
+			}
+			.secation-right-img li:nth-of-type(4):hover{
+				background: url(img/login/wxt.png);
+				background-size: 35px,35px;
+				height: 35px;
+			}
+			.secation-right-img-qq{
+				float: left;
+				margin-right: 20px;
+				width: 35px;
+			}
+			.secation-right-img-right{
+				float: right;
+			}
+			.secation-right-img ul:after{
+				content: '';
+				display: block;
+				clear: both;
+			}
+			.secation-right-img-right>span,.secation-right-img-right>img{
+				vertical-align: middle;
+				color: #999;
+			}
+			/*尾部分*/
+			.footer{
+				width: 100%;
+				text-align: center;
+				color: #333333;
+				margin-top: 30px;
+				padding-bottom: 30px;
+			}
+			.footer a{
+				color: #333333;
+				text-decoration: none;
+			}
+			.footer a:hover{
+				color: red;
+			}
+		</style>
+		
+		
+	</head>
+	
+	<body>
+		<div class="main">
+			<div class="header">
+				<a href="#"><img src="img/login/loginlogo.jpg"/></a>
+				<div class="h-right">
+					<span>
+						您好，欢迎光临1号店!
+					</span>
+					<a href="#">请登录</a>
+					<div class="h-right-help">
+						<img class="h-right-img" src="img/login/runbun.png"/>
+						<span>
+							帮助中心
+						</span>
+						<img class="h-right-img" src="img/login/turnb.png"/>
+					</div>
+				</div>
+				
+			</div>
+			
+			
+			
+			<div class="secation">
+				<div class="secation-child">
+					<div class="secation-left">
+						<img src="img/login/loadimg.jpg"/>
+					</div>
+					
+					
+					<div class="secation-right">
+						<div class="secation-right-1">
+							<span>
+								1号店用户登录
+							</span>
+							<a href="#">注册账号</a>
+						</div>
+						
+						<form action="" method="post">
+							<input type="text" value="" placeholder="邮箱/手机/用户名" /><br />
+							<input type="password" value="" placeholder="密码" />
+							<div class="secation-right-2">
+								<div class="secation-right-2-left">
+									<input type="checkbox"/>
+									<a href="#">自动登录</a>
+								</div>
+								<a href="#">忘记密码？</a>
+							</div>
+							
+							<input type="submit" value="登录"/>
+						</form>
+						<p>
+							更多合作网站账号登陆
+						</p>
+						
+						<div class="secation-right-img">
+							<ul>
+								<li class="secation-right-img-qq"><a href="#"></a></li>
+								<li class="secation-right-img-qq"><a href="#"></a></li>
+								<li class="secation-right-img-qq"><a href="#"></a></li>
+								<li class="secation-right-img-qq"><a href="#"></a></li>
+								<li class="secation-right-img-right">
+									<span>
+										更多合作网站
+									</span>
+										<img src="img/login/loadMore.png" height="15px"/>
+								</li>
+							</ul>
+						</div>
+						
+						
+					</div>
+				</div>
+			</div>
+			
+			
+			
+			<div class="footer">
+				<p>
+					<a href="#">沪ICP备13044278号</a>&nbsp;&nbsp;|
+					合字B1.B2-20130004&nbsp;&nbsp;|
+					<a href="#">营业执照</a>
+				</p>
+				<p>
+					Copyright&copy;1号店网上超市 2007-2016，All Rights Reserved
+				</p>
+			</div>
+		</div>
+	</body>
+</html>
