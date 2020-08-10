@@ -1,0 +1,3 @@
+ 执行增加命令：git add *   add后面的点，表示的是提交所有文件，如果想指定提交文件，可以写文件名。
+ 执行提交命令：git commit -m, "基于AngularJS考试作业系统"，-m后面是提示信息。
+ 推送：命令 git push git@github.com:用户名/仓库名.git
