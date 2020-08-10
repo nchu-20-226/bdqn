@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nchu.dao.EmployeeDao">
+
+    <resultMap id="BaseResultMap" type="com.nchu.entity.Employee">
+        <!--@Table employee-->
+        <result property="employeeid" column="employeeid" jdbcType="INTEGER"/>
+        <result property="employeename" column="employeename" jdbcType="VARCHAR"/>
+        <result property="username" column="username" jdbcType="VARCHAR"/>
+        <result property="phone" column="phone" jdbcType="VARCHAR"/>
+        <result property="email" column="email" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="VARCHAR"/>
+        <result property="departmentid" column="departmentid" jdbcType="INTEGER"/>
+        <result property="password" column="password" jdbcType="VARCHAR"/>
+        <result property="role" column="role" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--&lt;!&ndash;查询单个&ndash;&gt;
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          employeeid, employeename, username, phone, email, status, departmentid, password, role
+        from meeting.employee
+        where employeeid = #{employeeid}
+    </select>-->
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultType="com.nchu.entity.Employee">
+        select
+          employeeid, employeename, username, phone, email, status, departmentid, password, role
+        from meeting.employee
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultType="com.nchu.entity.Employee">
+        select
+        *
+        from meeting.employee
+        <where>
+           <!-- <if test="employeeid != null">
+                and employeeid = #{employeeid}
+            </if>-->
+            <if test="emp.employeename!= null and emp.employeename != ''">
+                and employeename = #{emp.employeename}
+            </if>
+            <if test="emp.username != null and emp.username != ''">
+                and username = #{emp.username}
+            </if>
+            <if test="emp.status != null">
+                and status = #{emp.status}
+            </if>
+            <!--<if test="phone != null and phone != ''">
+                and phone = #{phone}
+            </if>
+            <if test="email != null and email != ''">
+                and email = #{email}
+            </if>
+
+            <if test="departmentid != null">
+                and departmentid = #{departmentid}
+            </if>-->
+            <!--<if test="password != null and password != ''">
+                and password = #{password}
+            </if>
+            <if test="role != null and role != ''">
+                and role = #{role}
+            </if>-->
+        </where>
+        limit #{page}, #{size}
+    </select>
+
+   <!-- &lt;!&ndash;新增所有列&ndash;&gt;
+    <insert id="insert" keyProperty="employeeid" useGeneratedKeys="true">
+        insert into meeting.employee(employeename, username, phone, email, status, departmentid, password, role)
+        values (#{employeename}, #{username}, #{phone}, #{email}, #{status}, #{departmentid}, #{password}, #{role})
+    </insert>-->
+
+    <!--&lt;!&ndash;通过主键修改数据&ndash;&gt;
+    <update id="update">
+        update meeting.employee
+        <set>
+            <if test="employeename != null and employeename != ''">
+                employeename = #{employeename},
+            </if>
+            <if test="username != null and username != ''">
+                username = #{username},
+            </if>
+            <if test="phone != null and phone != ''">
+                phone = #{phone},
+            </if>
+            <if test="email != null and email != ''">
+                email = #{email},
+            </if>
+            <if test="status != null and status != ''">
+                status = #{status},
+            </if>
+            <if test="departmentid != null">
+                departmentid = #{departmentid},
+            </if>
+            <if test="password != null and password != ''">
+                password = #{password},
+            </if>
+            <if test="role != null and role != ''">
+                role = #{role},
+            </if>
+        </set>
+        where employeeid = #{employeeid}
+    </update>
+-->
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from meeting.employee where employeeid = #{employeeid}
+    </delete>
+
+
+
+
+
+    <insert id="insert" keyProperty="employeeid" useGeneratedKeys="true">
+        insert into meeting.employee(employeename, username, phone, email, status, departmentid, password, role)
+        values (#{employeename}, #{username}, #{phone}, #{email}, #{status}, #{departmentid}, #{password}, #{role})
+    </insert>
+    <update id="update">
+        update meeting.employee
+        set status=#{status}
+        where employeeid=#{employeeid}
+    </update>
+    <select id="doLogin" resultType="com.nchu.entity.Employee">
+        select * from meeting.employee
+        where username=#{username} and password=#{password}
+    </select>
+    <select id="getAllByStatus" resultType="com.nchu.entity.Employee">
+        select * from employee where status=#{status}
+    </select>
+    <select id="getTotal" resultType="java.lang.Long">
+        select
+        count(*)
+        from meeting.employee
+        <where>
+            <if test="emp.employeename!= null and emp.employeename != ''">
+                and employeename = #{emp.employeename}
+            </if>
+            <if test="emp.username != null and emp.username != ''">
+                and username = #{emp.username}
+            </if>
+            <if test="emp.status != null">
+                and status = #{emp.status}
+            </if>
+        </where>
+    </select>
+    <select id="queryAllBydepId" resultType="com.nchu.entity.Employee">
+        select * from employee where departmentid=#{departmentid}
+    </select>
+
+</mapper>

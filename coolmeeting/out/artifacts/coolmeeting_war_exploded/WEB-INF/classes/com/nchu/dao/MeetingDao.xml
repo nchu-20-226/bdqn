@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nchu.dao.MeetingDao">
+
+    <resultMap id="BaseResultMap" type="com.nchu.entity.Meeting">
+        <!--@Table meeting-->
+        <result property="meetingid" column="meetingid" jdbcType="INTEGER"/>
+        <result property="meetingname" column="meetingname" jdbcType="VARCHAR"/>
+        <result property="roomid" column="roomid" jdbcType="INTEGER"/>
+        <result property="reservationistid" column="reservationistid" jdbcType="INTEGER"/>
+        <result property="numberofparticipants" column="numberofparticipants" jdbcType="INTEGER"/>
+        <result property="starttime" column="starttime" jdbcType="TIMESTAMP"/>
+        <result property="endtime" column="endtime" jdbcType="TIMESTAMP"/>
+        <result property="reservationtime" column="reservationtime" jdbcType="TIMESTAMP"/>
+        <result property="canceledtime" column="canceledtime" jdbcType="TIMESTAMP"/>
+        <result property="description" column="description" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+          meetingid, meetingname, roomid, reservationistid, numberofparticipants, starttime, endtime, reservationtime, canceledtime, description, status
+        from meeting.meeting
+        where meetingid = #{meetingid}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+          meetingid, meetingname, roomid, reservationistid, numberofparticipants, starttime, endtime, reservationtime, canceledtime, description, status
+        from meeting.meeting
+        limit #{offset}, #{limit}
+    </select>
+    <select id="queryAllByStatus" resultType="com.nchu.entity.Meeting">
+        select * from meeting.meeting where status=#{status}
+    </select>
+    <resultMap id="Meeting-room" type="com.nchu.entity.Meeting">
+        <result property="meetingid" column="meetingid" jdbcType="INTEGER"/>
+        <result property="meetingname" column="meetingname" jdbcType="VARCHAR"/>
+        <result property="roomid" column="roomid" jdbcType="INTEGER"/>
+        <result property="reservationistid" column="reservationistid" jdbcType="INTEGER"/>
+        <result property="numberofparticipants" column="numberofparticipants" jdbcType="INTEGER"/>
+        <result property="starttime" column="starttime" jdbcType="TIMESTAMP"/>
+        <result property="endtime" column="endtime" jdbcType="TIMESTAMP"/>
+        <result property="reservationtime" column="reservationtime" jdbcType="TIMESTAMP"/>
+        <result property="canceledtime" column="canceledtime" jdbcType="TIMESTAMP"/>
+        <result property="description" column="description" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="VARCHAR"/>
+
+        <association property="meetingroom" javaType="Meetingroom">
+            <result property="roomname" column="roomname"/>
+        </association>
+    </resultMap>
+    <select id="queryAll" resultMap="Meeting-room">
+        select
+        meeting.*,roomname
+        from meeting,meetingroom as room
+        where meeting.roomid=room.roomid
+        <!--<if test="meet.meetingname!= null and meet.meetingname != ''">
+            and meetingname = #{meet.meetingname}
+        </if>
+
+        <if test="meet.starttime != null">
+            and starttime = #{meet.starttime}
+        </if>
+        <if test="meet.endtime != null">
+            and endtime = #{meet.endtime}
+        </if>
+        <if test="meet.reservationistid != null">
+            and reservationistid = #{meet.reservationistid}
+        </if>
+        <if test="meet.reservationtime != null">
+            and reservationtime = #{meet.reservationtime}
+        </if>-->
+        order by roomid
+        limit #{page}, #{size}
+    </select>
+    <select id="getTotal" resultType="java.lang.Long">
+        select
+        count(*)
+        from meeting.meeting
+        <!--<where>
+            <if test="meet.meetingname!= null and meet.meetingname != ''">
+                and meetingname = #{meet.meetingname}
+            </if>
+
+            <if test="meet.starttime != null">
+                and starttime = #{meet.starttime}
+            </if>
+            <if test="meet.endtime != null">
+                and endtime = #{meet.endtime}
+            </if>
+            <if test="meet.reservationistid != null">
+                and reservationistid = #{meet.reservationistid}
+            </if>
+            <if test="meet.reservationtime != null">
+                and reservationtime = #{meet.reservationtime}
+            </if>
+
+        </where>-->
+    </select>
+    <!--通过实体作为筛选条件查询-->
+   <!-- <select id="queryAll" resultMap="BaseResultMap">
+        select
+          meetingid, meetingname, roomid, reservationistid, numberofparticipants, starttime, endtime, reservationtime, canceledtime, description, status
+        from meeting.meeting
+        <where>
+            <if test="meetingid != null">
+                and meetingid = #{meetingid}
+            </if>
+            <if test="meetingname != null and meetingname != ''">
+                and meetingname = #{meetingname}
+            </if>
+            <if test="roomid != null">
+                and roomid = #{roomid}
+            </if>
+            <if test="reservationistid != null">
+                and reservationistid = #{reservationistid}
+            </if>
+            <if test="numberofparticipants != null">
+                and numberofparticipants = #{numberofparticipants}
+            </if>
+            <if test="starttime != null">
+                and starttime = #{starttime}
+            </if>
+            <if test="endtime != null">
+                and endtime = #{endtime}
+            </if>
+            <if test="reservationtime != null">
+                and reservationtime = #{reservationtime}
+            </if>
+            <if test="canceledtime != null">
+                and canceledtime = #{canceledtime}
+            </if>
+            <if test="description != null and description != ''">
+                and description = #{description}
+            </if>
+            <if test="status != null and status != ''">
+                and status = #{status}
+            </if>
+        </where>
+    </select>-->
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="meetingid" useGeneratedKeys="true">
+        insert into meeting.meeting(meetingname, roomid, reservationistid, numberofparticipants, starttime, endtime, reservationtime, canceledtime, description, status)
+        values (#{meetingname}, #{roomid}, #{reservationistid}, #{numberofparticipants}, #{starttime}, #{endtime}, #{reservationtime}, #{canceledtime}, #{description}, #{status})
+    </insert>
+    <insert id="addParticipants">
+        insert into meeting.meetingparticipants values
+        <foreach collection="mps" item="mp" separator=",">
+            (#{meetid},#{mp})
+        </foreach>
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update meeting.meeting
+        <set>
+            <if test="meetingname != null and meetingname != ''">
+                meetingname = #{meetingname},
+            </if>
+            <if test="roomid != null">
+                roomid = #{roomid},
+            </if>
+            <if test="reservationistid != null">
+                reservationistid = #{reservationistid},
+            </if>
+            <if test="numberofparticipants != null">
+                numberofparticipants = #{numberofparticipants},
+            </if>
+            <if test="starttime != null">
+                starttime = #{starttime},
+            </if>
+            <if test="endtime != null">
+                endtime = #{endtime},
+            </if>
+            <if test="reservationtime != null">
+                reservationtime = #{reservationtime},
+            </if>
+            <if test="canceledtime != null">
+                canceledtime = #{canceledtime},
+            </if>
+            <if test="description != null and description != ''">
+                description = #{description},
+            </if>
+            <if test="status != null and status != ''">
+                status = #{status},
+            </if>
+        </set>
+        where meetingid = #{meetingid}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from meeting.meeting where meetingid = #{meetingid}
+    </delete>
+
+</mapper>

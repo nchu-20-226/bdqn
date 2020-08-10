@@ -1,0 +1,19 @@
+{
+  "name" : "Counter",
+  "originTableName" : "counter",
+  "comment" : null,
+  "fullColumn" : [ {
+    "name" : "visitcount",
+    "comment" : null,
+    "type" : null,
+    "shortType" : null,
+    "ktShortType" : "Int",
+    "custom" : false,
+    "ext" : { }
+  } ],
+  "pkColumn" : null,
+  "otherColumn" : null,
+  "savePackageName" : "com.nchu",
+  "savePath" : "./src/main/java/com/nchu",
+  "saveModelName" : "coolmeeting"
+}

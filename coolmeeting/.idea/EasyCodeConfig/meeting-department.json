@@ -1,0 +1,27 @@
+{
+  "name" : "Department",
+  "originTableName" : "department",
+  "comment" : null,
+  "fullColumn" : [ {
+    "name" : "departmentid",
+    "comment" : null,
+    "type" : null,
+    "shortType" : null,
+    "ktShortType" : "Int",
+    "custom" : false,
+    "ext" : { }
+  }, {
+    "name" : "departmentname",
+    "comment" : null,
+    "type" : null,
+    "shortType" : null,
+    "ktShortType" : "String",
+    "custom" : false,
+    "ext" : { }
+  } ],
+  "pkColumn" : null,
+  "otherColumn" : null,
+  "savePackageName" : "com.nchu",
+  "savePath" : "./src/main/java/com/nchu",
+  "saveModelName" : "coolmeeting"
+}
